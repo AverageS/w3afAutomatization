@@ -15,10 +15,10 @@ def main(filename='urls'):
     urls = []
     with open(filename, 'r') as fp:
         urls = fp.readlines()
-    script_names = [x.replace('\n', '') + '.w3af' for x in urls]
-    for script_name in script_names:
+    script_names = [x.replace('\n', '').replace('/', '') + '.w3af' for x in urls]
+    for index, script_name in enumerate(script_names):
         with open(script_name, 'w') as fp:
-            fp.write(make_string(script_name[:-4]))
+            fp.write(make_string(urls[index]))
 
     pops = []
 
