@@ -7,11 +7,14 @@ def make_string(url_name):
     start_sequence += "set output_file '~/" + url_name.replace('/', '') + ".txt'\n"
     start_sequence += '''save\nback\nplugins output config html_file\n'''
     start_sequence += "set output_file '~/" +  url_name.replace('/', '') + ".html'\n"
-    start_sequence += "save\nback\ntarget set " +  url_name + "\nsave\ncleanup\nstart\n"
+    start_sequence += "save\nback\ntarget set target " +  url_name + "\nsave\ncleanup\nstart\n"
+    logging.debug(start_sequence)
     return start_sequence
 
 
 def main(filename='urls'):
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
     urls = []
     with open(filename, 'r') as fp:
         urls = fp.readlines()
@@ -27,6 +30,8 @@ def main(filename='urls'):
         time.sleep(600)
         pop.poll()
         pop.kill()
+        logging.info(script_name + 'has finished')
+
 
 
 
