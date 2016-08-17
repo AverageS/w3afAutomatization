@@ -7,7 +7,7 @@ def make_string(url_name):
     start_sequence += "set output_file '~/" + url_name.replace('/', '') + ".txt'\n"
     start_sequence += '''save\nback\nplugins output config html_file\n'''
     start_sequence += "set output_file '~/" +  url_name.replace('/', '') + ".html'\n"
-    start_sequence += "save\nback\ntarget set " +  url_name.replace('/', '') + "\nstart\n"
+    start_sequence += "save\nback\ntarget set " +  url_name + "\nstart\n"
     return start_sequence
 
 
