@@ -13,13 +13,12 @@ def make_string(url_name):
 
 
 def main(filename='urls'):
-    logging.basicConfig(level=logging.INFO,
+    logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s - %(levelname)s - %(message)s')
-    urls = []
     with open(filename, 'r') as fp:
         urls = fp.readlines()
-    urls = [x.replace('\n', '') for x in urls]
-    script_names = [x.replace('\n', '') + '.w3af' for x in urls]
+    urls = list(map(lambda x: 'https://' + x.replace('\n', '') if 'https://' not in x else x.replace('\n', ''), urls))
+    script_names = [x.replace('/', '') + '.w3af' for x in urls]
     for index, script_name in enumerate(script_names):
         with open(script_name, 'w') as fp:
             fp.write(make_string(urls[index]))
